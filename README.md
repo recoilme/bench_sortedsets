@@ -3,41 +3,44 @@
 ## Legend
 
  - HashMap - not orderd, just an etalon for comparasion (HashMap)
- - RadixTree - github.com/gammazero/radixtree (Adaptive Radix Tree)
+ - RadixTree - github.com/gammazero/radixtree (Radix Tree with array nodes)
  - PlarRadixTree - github.com/plar/go-adaptive-radix-tree (Adaptive Radix Tree)
  - SortedSet - github.com/recoilme/sortedset (Array)
  - BTreeSet - github.com/recoilme/btreeset (Simple BTree)
  - Sorted - github.com/buraksezer/sorted (SkipList)
  - GoogleBTree - github.com/google/btree (LLRB Tree)
+ - Art - github.com/arriqaaq/art (Adaptive Radix Tree)
 
 ## Results
 
  ```
- (base) v-kulibaba:bench_sortedsets v.kulibaba$ go test -bench=.
+(base) v-kulibaba:bench_sortedsets v.kulibaba$ go test -bench=.
 goos: darwin
 goarch: amd64
 pkg: github.com/recoilme/bench_sortedsets
 cpu: Intel(R) Core(TM) i7-8569U CPU @ 2.80GHz
-BenchmarkHashMapPut-8           26684005                61.04 ns/op            6 B/op          0 allocs/op
-BenchmarkHashMapGet-8           60778569                32.14 ns/op            0 B/op          0 allocs/op
-BenchmarkRadixTreePut-8         12444097                99.81 ns/op           43 B/op          1 allocs/op
-BenchmarkRadixTreeGet-8         15230964                74.45 ns/op            0 B/op          0 allocs/op
-BenchmarkPlarRadixTreePut-8      8196140               146.0 ns/op            36 B/op          1 allocs/op
-BenchmarkPlarRadixTreeGet-8     10410999               122.7 ns/op             0 B/op          0 allocs/op
-BenchmarkSortedSetPut-8          9648045               160.1 ns/op             4 B/op          0 allocs/op
-BenchmarkSortedSetGet-8          8808595               145.4 ns/op             0 B/op          0 allocs/op
-BenchmarkBTreeSetPut-8          12887174               110.7 ns/op             8 B/op          0 allocs/op
-BenchmarkBTreeSetGet-8          10431980               129.8 ns/op             0 B/op          0 allocs/op
-BenchmarkSortedPut-8             4385426               278.8 ns/op            33 B/op          0 allocs/op
-BenchmarkSortedGet-8             4008255               354.0 ns/op             0 B/op          0 allocs/op
-BenchmarkGoogleBTreePut-8        3718650               362.9 ns/op            32 B/op          1 allocs/op
-BenchmarkGoogleBTreeGet-8        4640356               304.0 ns/op            16 B/op          1 allocs/op
+BenchmarkHashMapPut-8           26603949                62.44 ns/op            6 B/op          0 allocs/op
+BenchmarkHashMapGet-8           66423618                32.66 ns/op            0 B/op          0 allocs/op
+BenchmarkRadixTreePut-8         11432383               104.4 ns/op            44 B/op          1 allocs/op
+BenchmarkRadixTreeGet-8         16536664                74.63 ns/op            0 B/op          0 allocs/op
+BenchmarkPlarRadixTreePut-8      8326839               149.2 ns/op            36 B/op          1 allocs/op
+BenchmarkPlarRadixTreeGet-8     11179678               121.5 ns/op             0 B/op          0 allocs/op
+BenchmarkSortedSetPut-8          9485239               148.0 ns/op             4 B/op          0 allocs/op
+BenchmarkSortedSetGet-8          8579707               149.7 ns/op             0 B/op          0 allocs/op
+BenchmarkBTreeSetPut-8          11138948               125.1 ns/op             8 B/op          0 allocs/op
+BenchmarkBTreeSetGet-8           9803560               139.2 ns/op             0 B/op          0 allocs/op
+BenchmarkSortedPut-8             3925093               298.0 ns/op            32 B/op          0 allocs/op
+BenchmarkSortedGet-8             3393968               367.9 ns/op             0 B/op          0 allocs/op
+BenchmarkGoogleBTreePut-8        3482337               381.9 ns/op            33 B/op          1 allocs/op
+BenchmarkGoogleBTreeGet-8        4549512               312.8 ns/op            16 B/op          1 allocs/op
+BenchmarkArtPut-8               14644272                85.53 ns/op           25 B/op          1 allocs/op
+BenchmarkArtGet-8               16931152                66.83 ns/op           15 B/op          0 allocs/op
 PASS
  ```
 
 # Conclusion
 
- github.com/gammazero/radixtree - best implementation by speed/allocations
+ github.com/arriqaaq/art - is best
 
 
 # Author

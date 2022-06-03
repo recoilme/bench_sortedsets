@@ -1,3 +1,5 @@
+github.com/arriqaaq/art v0.1.2 h1:GoAiArsfRTV8wPb2X7/58ZFNBUwoPfGfsTvweeiYgzg=
+github.com/arriqaaq/art v0.1.2/go.mod h1:11r05D8a+owc6lTpI/yVypn16g7LrsVif+8lU9riSDM=
 github.com/buraksezer/sorted v0.0.0-20190925064702-aafacfa34653 h1:6jp0y4k/rQBnsfvpLo58yAW2DkhdweDnd2ed2NoByqg=
 github.com/buraksezer/sorted v0.0.0-20190925064702-aafacfa34653/go.mod h1:4/1iEX6xpEOlW2OPPVTqz8djRkG/GhCHICjqTNls/nE=
 github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=

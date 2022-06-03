@@ -1,11 +1,13 @@
 package main
 
 import (
+	"encoding/binary"
 	"fmt"
 	"strconv"
 	"testing"
 	"time"
 
+	art2 "github.com/arriqaaq/art"
 	"github.com/buraksezer/sorted"
 	"github.com/gammazero/radixtree"
 	"github.com/google/btree"
@@ -250,5 +252,45 @@ func BenchmarkGoogleBTreeGet(b *testing.B) {
 		if found != true {
 			fmt.Println("Error, not found:", string(strs[n]))
 		}
+	}
+}
+
+func BenchmarkArtPut(b *testing.B) {
+	
+	strs := make([][]byte, b.N)
+	
+	for n := 0; n < b.N; n++ {
+		bin:=make([]byte,8)
+		binary.BigEndian.PutUint64(bin,uint64(time.Now().UnixNano()))
+		strs[n] = bin
+	}
+
+	b.ResetTimer()
+	b.ReportAllocs()
+	tree := art2.NewTree()
+	for n := 0; n < b.N; n++ {
+		tree.Insert(strs[n], nil)
+	}
+}
+
+func BenchmarkArtGet(b *testing.B) {
+	strs := make([][]byte, b.N)
+	
+	for n := 0; n < b.N; n++ {
+		bin:=make([]byte,8)
+		binary.BigEndian.PutUint64(bin,uint64(time.Now().UnixNano()))
+		strs[n] = bin
+	}
+
+	tree := art2.NewTree()
+	for n := 0; n < b.N; n++ {
+		tree.Insert(strs[n], 0)
+	}
+
+	b.ResetTimer()
+	b.ReportAllocs()
+	for n := 0; n < b.N; n++ {
+		_ = tree.Search(strs[n])
+		
 	}
 }
