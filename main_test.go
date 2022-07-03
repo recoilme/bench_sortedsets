@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/binary"
 	"fmt"
 	"strconv"
@@ -12,15 +13,31 @@ import (
 	"github.com/gammazero/radixtree"
 	"github.com/google/btree"
 	art "github.com/plar/go-adaptive-radix-tree"
+	art4 "github.com/recoilme/art"
+
 	"github.com/recoilme/btreeset"
 	"github.com/recoilme/sortedset"
 )
 
-func BenchmarkHashMapPut(b *testing.B) {
-	strs := make([]string, b.N)
-	for n := 0; n < b.N; n++ {
-		strs[n] = strconv.FormatInt(time.Now().UnixNano(), 10)
+func initStr(N int) []string {
+	strs := make([]string, N)
+	for n := 0; n < N; n++ {
+		strs[n] = strconv.FormatInt(int64(n), 10)
 	}
+	return strs
+}
+
+func initBin(N int) [][]byte {
+	bytes := make([][]byte, N)
+	for n := 0; n < N; n++ {
+		bytes[n] = make([]byte, 8)
+		binary.BigEndian.PutUint64(bytes[n], uint64(n))
+	}
+	return bytes
+}
+
+func BenchmarkHashMapPut(b *testing.B) {
+	strs := initStr(b.N)
 	b.ResetTimer()
 	b.ReportAllocs()
 	set := make(map[string]bool)
@@ -30,10 +47,7 @@ func BenchmarkHashMapPut(b *testing.B) {
 }
 
 func BenchmarkHashMapGet(b *testing.B) {
-	strs := make([]string, b.N)
-	for n := 0; n < b.N; n++ {
-		strs[n] = strconv.FormatInt(time.Now().UnixNano(), 10)
-	}
+	strs := initStr(b.N)
 	set := make(map[string]bool)
 	for n := 0; n < b.N; n++ {
 		set[strs[n]] = true
@@ -46,10 +60,7 @@ func BenchmarkHashMapGet(b *testing.B) {
 }
 
 func BenchmarkRadixTreePut(b *testing.B) {
-	strs := make([]string, b.N)
-	for n := 0; n < b.N; n++ {
-		strs[n] = strconv.FormatInt(time.Now().UnixNano(), 10)
-	}
+	strs := initStr(b.N)
 	b.ResetTimer()
 	b.ReportAllocs()
 	tree := radixtree.New()
@@ -59,10 +70,7 @@ func BenchmarkRadixTreePut(b *testing.B) {
 }
 
 func BenchmarkRadixTreeGet(b *testing.B) {
-	strs := make([]string, b.N)
-	for n := 0; n < b.N; n++ {
-		strs[n] = strconv.FormatInt(time.Now().UnixNano(), 10)
-	}
+	strs := initStr(b.N)
 
 	tree := radixtree.New()
 	for n := 0; n < b.N; n++ {
@@ -79,10 +87,7 @@ func BenchmarkRadixTreeGet(b *testing.B) {
 }
 
 func BenchmarkPlarRadixTreePut(b *testing.B) {
-	strs := make([]string, b.N)
-	for n := 0; n < b.N; n++ {
-		strs[n] = strconv.FormatInt(time.Now().UnixNano(), 10)
-	}
+	strs := initStr(b.N)
 	b.ResetTimer()
 	b.ReportAllocs()
 	tree := art.New()
@@ -92,11 +97,7 @@ func BenchmarkPlarRadixTreePut(b *testing.B) {
 }
 
 func BenchmarkPlarRadixTreeGet(b *testing.B) {
-	strs := make([]string, b.N)
-	for n := 0; n < b.N; n++ {
-		strs[n] = strconv.FormatInt(time.Now().UnixNano(), 10)
-	}
-
+	strs := initStr(b.N)
 	tree := art.New()
 	for n := 0; n < b.N; n++ {
 		tree.Insert(art.Key(strs[n]), nil)
@@ -112,10 +113,7 @@ func BenchmarkPlarRadixTreeGet(b *testing.B) {
 }
 
 func BenchmarkSortedSetPut(b *testing.B) {
-	strs := make([]string, b.N)
-	for n := 0; n < b.N; n++ {
-		strs[n] = strconv.FormatInt(time.Now().UnixNano(), 10)
-	}
+	strs := initStr(b.N)
 	b.ResetTimer()
 	b.ReportAllocs()
 	set := sortedset.New()
@@ -125,11 +123,7 @@ func BenchmarkSortedSetPut(b *testing.B) {
 }
 
 func BenchmarkSortedSetGet(b *testing.B) {
-	strs := make([]string, b.N)
-	for n := 0; n < b.N; n++ {
-		strs[n] = strconv.FormatInt(time.Now().UnixNano(), 10)
-	}
-
+	strs := initStr(b.N)
 	set := sortedset.New()
 	for n := 0; n < b.N; n++ {
 		set.Put(strs[n])
@@ -145,10 +139,7 @@ func BenchmarkSortedSetGet(b *testing.B) {
 }
 
 func BenchmarkBTreeSetPut(b *testing.B) {
-	bytes := make([][]byte, b.N)
-	for n := 0; n < b.N; n++ {
-		bytes[n] = []byte(strconv.FormatInt(time.Now().UnixNano(), 10))
-	}
+	bytes := initBin(b.N)
 	b.ResetTimer()
 	b.ReportAllocs()
 	bt := &btreeset.BTreeSet{}
@@ -158,10 +149,7 @@ func BenchmarkBTreeSetPut(b *testing.B) {
 }
 
 func BenchmarkBTreeSetGet(b *testing.B) {
-	bytes := make([][]byte, b.N)
-	for n := 0; n < b.N; n++ {
-		bytes[n] = []byte(strconv.FormatInt(time.Now().UnixNano(), 10))
-	}
+	bytes := initBin(b.N)
 
 	bt := &btreeset.BTreeSet{}
 	for n := 0; n < b.N; n++ {
@@ -178,10 +166,7 @@ func BenchmarkBTreeSetGet(b *testing.B) {
 }
 
 func BenchmarkSortedPut(b *testing.B) {
-	bytes := make([][]byte, b.N)
-	for n := 0; n < b.N; n++ {
-		bytes[n] = []byte(strconv.FormatInt(time.Now().UnixNano(), 10))
-	}
+	bytes := initBin(b.N)
 	b.ResetTimer()
 	b.ReportAllocs()
 	ss := sorted.NewSortedSet(0)
@@ -192,10 +177,7 @@ func BenchmarkSortedPut(b *testing.B) {
 }
 
 func BenchmarkSortedGet(b *testing.B) {
-	bytes := make([][]byte, b.N)
-	for n := 0; n < b.N; n++ {
-		bytes[n] = []byte(strconv.FormatInt(time.Now().UnixNano(), 10))
-	}
+	bytes := initBin(b.N)
 
 	ss := sorted.NewSortedSet(0)
 	//defer ss.Close()
@@ -222,10 +204,7 @@ func (a Str) Less(b btree.Item) bool {
 }
 
 func BenchmarkGoogleBTreePut(b *testing.B) {
-	strs := make([]string, b.N)
-	for n := 0; n < b.N; n++ {
-		strs[n] = strconv.FormatInt(time.Now().UnixNano(), 10)
-	}
+	strs := initStr(b.N)
 	b.ResetTimer()
 	b.ReportAllocs()
 	tr := btree.New(3)
@@ -235,7 +214,7 @@ func BenchmarkGoogleBTreePut(b *testing.B) {
 }
 
 func BenchmarkGoogleBTreeGet(b *testing.B) {
-	strs := make([]string, b.N)
+	strs := initStr(b.N)
 	for n := 0; n < b.N; n++ {
 		strs[n] = strconv.FormatInt(time.Now().UnixNano(), 10)
 	}
@@ -256,14 +235,8 @@ func BenchmarkGoogleBTreeGet(b *testing.B) {
 }
 
 func BenchmarkArtPut(b *testing.B) {
-	
-	strs := make([][]byte, b.N)
-	
-	for n := 0; n < b.N; n++ {
-		bin:=make([]byte,8)
-		binary.BigEndian.PutUint64(bin,uint64(time.Now().UnixNano()))
-		strs[n] = bin
-	}
+
+	strs := initBin(b.N)
 
 	b.ResetTimer()
 	b.ReportAllocs()
@@ -274,23 +247,48 @@ func BenchmarkArtPut(b *testing.B) {
 }
 
 func BenchmarkArtGet(b *testing.B) {
-	strs := make([][]byte, b.N)
-	
-	for n := 0; n < b.N; n++ {
-		bin:=make([]byte,8)
-		binary.BigEndian.PutUint64(bin,uint64(time.Now().UnixNano()))
-		strs[n] = bin
-	}
+	strs := initBin(b.N)
 
 	tree := art2.NewTree()
 	for n := 0; n < b.N; n++ {
-		tree.Insert(strs[n], 0)
+		tree.Insert(strs[n], strs[n])
 	}
 
 	b.ResetTimer()
 	b.ReportAllocs()
 	for n := 0; n < b.N; n++ {
-		_ = tree.Search(strs[n])
-		
+		val := tree.Search(strs[n])
+		if !bytes.Equal(val.([]byte), strs[n]) {
+			b.Fail()
+		}
+
+	}
+}
+
+func BenchmarkArtRecoilmePut(b *testing.B) {
+
+	strs := initBin(b.N)
+
+	b.ResetTimer()
+	b.ReportAllocs()
+	tree := art4.New()
+	for n := 0; n < b.N; n++ {
+		tree.Set(strs[n], nil)
+	}
+}
+
+func BenchmarkArtRecoilmeGet(b *testing.B) {
+	strs := initBin(b.N)
+
+	tree := art4.New()
+	for n := 0; n < b.N; n++ {
+		tree.Set(strs[n], nil)
+	}
+
+	b.ResetTimer()
+	b.ReportAllocs()
+	for n := 0; n < b.N; n++ {
+		_ = tree.Get(strs[n])
+
 	}
 }

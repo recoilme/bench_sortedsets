@@ -9,12 +9,11 @@ require (
 	github.com/recoilme/btreeset v0.0.0-20200809183105-7b1adf6e3d3c
 )
 
-require (
-	github.com/arriqaaq/art v0.1.2 // indirect
-	github.com/tidwall/lotsa v1.0.2 // indirect
-)
+require github.com/tidwall/lotsa v1.0.2 // indirect
 
 require (
+	github.com/arriqaaq/art v0.1.2
 	github.com/plar/go-adaptive-radix-tree v1.0.4
+	github.com/recoilme/art v0.0.0-20220703124802-da0d28b28891
 	github.com/recoilme/sortedset v0.0.0-20200825100557-fdc6fff0bc87
 )

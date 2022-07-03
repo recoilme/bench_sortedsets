@@ -1,0 +1,60 @@
+goos: darwin
+goarch: amd64
+pkg: github.com/recoilme/bench_sortedsets
+cpu: Intel(R) Core(TM) i7-8569U CPU @ 2.80GHz
+BenchmarkHashMapPut-8         	 4713699	       346.6 ns/op	      77 B/op	       0 allocs/op
+BenchmarkHashMapPut-8         	 5799327	       271.6 ns/op	      63 B/op	       0 allocs/op
+BenchmarkHashMapPut-8         	 5650677	       266.7 ns/op	      65 B/op	       0 allocs/op
+BenchmarkHashMapGet-8         	14645505	       129.8 ns/op	       0 B/op	       0 allocs/op
+BenchmarkHashMapGet-8         	17061642	       102.4 ns/op	       0 B/op	       0 allocs/op
+BenchmarkHashMapGet-8         	16762398	       101.7 ns/op	       0 B/op	       0 allocs/op
+BenchmarkRadixTreePut-8       	 6402754	       197.8 ns/op	     129 B/op	       2 allocs/op
+BenchmarkRadixTreePut-8       	 6366630	       202.3 ns/op	     129 B/op	       2 allocs/op
+BenchmarkRadixTreePut-8       	 6203920	       198.4 ns/op	     129 B/op	       2 allocs/op
+BenchmarkRadixTreeGet-8       	16502389	        77.64 ns/op	       0 B/op	       0 allocs/op
+BenchmarkRadixTreeGet-8       	16637722	        79.56 ns/op	       0 B/op	       0 allocs/op
+BenchmarkRadixTreeGet-8       	15747091	        78.49 ns/op	       0 B/op	       0 allocs/op
+BenchmarkPlarRadixTreePut-8   	 4311138	       312.8 ns/op	     107 B/op	       4 allocs/op
+BenchmarkPlarRadixTreePut-8   	 4421857	       301.4 ns/op	     107 B/op	       4 allocs/op
+BenchmarkPlarRadixTreePut-8   	 4387792	       297.9 ns/op	     107 B/op	       4 allocs/op
+BenchmarkPlarRadixTreeGet-8   	 9773742	       133.3 ns/op	       0 B/op	       0 allocs/op
+BenchmarkPlarRadixTreeGet-8   	 9460204	       128.7 ns/op	       0 B/op	       0 allocs/op
+BenchmarkPlarRadixTreeGet-8   	10600096	       133.0 ns/op	       0 B/op	       0 allocs/op
+BenchmarkSortedSetPut-8       	 5878444	       248.4 ns/op	      35 B/op	       0 allocs/op
+BenchmarkSortedSetPut-8       	 5390931	       238.2 ns/op	      35 B/op	       0 allocs/op
+BenchmarkSortedSetPut-8       	 5870640	       243.7 ns/op	      35 B/op	       0 allocs/op
+BenchmarkSortedSetGet-8       	 6615266	       204.0 ns/op	       0 B/op	       0 allocs/op
+BenchmarkSortedSetGet-8       	 6628926	       206.9 ns/op	       0 B/op	       0 allocs/op
+BenchmarkSortedSetGet-8       	 6696936	       211.7 ns/op	       0 B/op	       0 allocs/op
+BenchmarkBTreeSetPut-8        	 9462654	       160.9 ns/op	      64 B/op	       0 allocs/op
+BenchmarkBTreeSetPut-8        	 8917950	       158.3 ns/op	      64 B/op	       0 allocs/op
+BenchmarkBTreeSetPut-8        	 9119781	       158.8 ns/op	      64 B/op	       0 allocs/op
+BenchmarkBTreeSetGet-8        	 8335551	       175.4 ns/op	       0 B/op	       0 allocs/op
+BenchmarkBTreeSetGet-8        	 8806846	       160.4 ns/op	       0 B/op	       0 allocs/op
+BenchmarkBTreeSetGet-8        	 8854311	       167.9 ns/op	       0 B/op	       0 allocs/op
+BenchmarkSortedPut-8          	 3446830	       372.7 ns/op	     203 B/op	       0 allocs/op
+BenchmarkSortedPut-8          	 3228184	       401.9 ns/op	     217 B/op	       0 allocs/op
+BenchmarkSortedPut-8          	 3230271	       382.2 ns/op	     217 B/op	       0 allocs/op
+BenchmarkSortedGet-8          	 3303466	       439.9 ns/op	       0 B/op	       0 allocs/op
+BenchmarkSortedGet-8          	 3224203	       421.4 ns/op	       0 B/op	       0 allocs/op
+BenchmarkSortedGet-8          	 3185936	       401.9 ns/op	       0 B/op	       0 allocs/op
+BenchmarkGoogleBTreePut-8     	 1988200	       652.3 ns/op	     151 B/op	       3 allocs/op
+BenchmarkGoogleBTreePut-8     	 1906075	       680.8 ns/op	     151 B/op	       3 allocs/op
+BenchmarkGoogleBTreePut-8     	 1921630	       594.5 ns/op	     151 B/op	       3 allocs/op
+BenchmarkGoogleBTreeGet-8     	 4599200	       327.8 ns/op	      16 B/op	       1 allocs/op
+BenchmarkGoogleBTreeGet-8     	 4236870	       326.7 ns/op	      16 B/op	       1 allocs/op
+BenchmarkGoogleBTreeGet-8     	 4423771	       305.8 ns/op	      16 B/op	       1 allocs/op
+BenchmarkArtPut-8             	 7777678	       153.2 ns/op	      83 B/op	       3 allocs/op
+BenchmarkArtPut-8             	 7703436	       152.6 ns/op	      83 B/op	       3 allocs/op
+BenchmarkArtPut-8             	 7770456	       152.3 ns/op	      83 B/op	       3 allocs/op
+BenchmarkArtGet-8             	25119318	        45.53 ns/op	       0 B/op	       0 allocs/op
+BenchmarkArtGet-8             	25202536	        52.55 ns/op	       0 B/op	       0 allocs/op
+BenchmarkArtGet-8             	24463861	        45.67 ns/op	       0 B/op	       0 allocs/op
+BenchmarkArtRecoilmePut-8     	 8986790	       128.2 ns/op	      90 B/op	       1 allocs/op
+BenchmarkArtRecoilmePut-8     	 9492957	       121.2 ns/op	      90 B/op	       1 allocs/op
+BenchmarkArtRecoilmePut-8     	10197430	       123.6 ns/op	      90 B/op	       1 allocs/op
+BenchmarkArtRecoilmeGet-8     	37601071	        33.76 ns/op	       0 B/op	       0 allocs/op
+BenchmarkArtRecoilmeGet-8     	37511954	        34.89 ns/op	       0 B/op	       0 allocs/op
+BenchmarkArtRecoilmeGet-8     	34731398	        33.39 ns/op	       0 B/op	       0 allocs/op
+PASS
+ok  	github.com/recoilme/bench_sortedsets	199.351s

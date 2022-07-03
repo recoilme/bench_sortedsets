@@ -10,37 +10,74 @@
  - Sorted - github.com/buraksezer/sorted (SkipList)
  - GoogleBTree - github.com/google/btree (LLRB Tree)
  - Art - github.com/arriqaaq/art (Adaptive Radix Tree)
+ - ArtRecoilme - github.com/recoilme/art (Adaptive Radix Tree)
 
 ## Results
 
  ```
-(base) v-kulibaba:bench_sortedsets v.kulibaba$ go test -bench=.
-goos: darwin
-goarch: amd64
-pkg: github.com/recoilme/bench_sortedsets
-cpu: Intel(R) Core(TM) i7-8569U CPU @ 2.80GHz
-BenchmarkHashMapPut-8           26603949                62.44 ns/op            6 B/op          0 allocs/op
-BenchmarkHashMapGet-8           66423618                32.66 ns/op            0 B/op          0 allocs/op
-BenchmarkRadixTreePut-8         11432383               104.4 ns/op            44 B/op          1 allocs/op
-BenchmarkRadixTreeGet-8         16536664                74.63 ns/op            0 B/op          0 allocs/op
-BenchmarkPlarRadixTreePut-8      8326839               149.2 ns/op            36 B/op          1 allocs/op
-BenchmarkPlarRadixTreeGet-8     11179678               121.5 ns/op             0 B/op          0 allocs/op
-BenchmarkSortedSetPut-8          9485239               148.0 ns/op             4 B/op          0 allocs/op
-BenchmarkSortedSetGet-8          8579707               149.7 ns/op             0 B/op          0 allocs/op
-BenchmarkBTreeSetPut-8          11138948               125.1 ns/op             8 B/op          0 allocs/op
-BenchmarkBTreeSetGet-8           9803560               139.2 ns/op             0 B/op          0 allocs/op
-BenchmarkSortedPut-8             3925093               298.0 ns/op            32 B/op          0 allocs/op
-BenchmarkSortedGet-8             3393968               367.9 ns/op             0 B/op          0 allocs/op
-BenchmarkGoogleBTreePut-8        3482337               381.9 ns/op            33 B/op          1 allocs/op
-BenchmarkGoogleBTreeGet-8        4549512               312.8 ns/op            16 B/op          1 allocs/op
-BenchmarkArtPut-8               14644272                85.53 ns/op           25 B/op          1 allocs/op
-BenchmarkArtGet-8               16931152                66.83 ns/op           15 B/op          0 allocs/op
-PASS
+(base) v-kulibaba:bench_sortedsets v.kulibaba$ go test -bench=. -benchmem -count=3 > x.txt
+(base) v-kulibaba:bench_sortedsets v.kulibaba$ benchstat x.txt
+name                time/op
+HashMapPut-8         295ns ±18%
+HashMapGet-8         111ns ±17%
+RadixTreePut-8       200ns ± 1%
+RadixTreeGet-8      78.6ns ± 1%
+PlarRadixTreePut-8   304ns ± 3%
+PlarRadixTreeGet-8   132ns ± 2%
+SortedSetPut-8       243ns ± 2%
+SortedSetGet-8       208ns ± 2%
+BTreeSetPut-8        159ns ± 1%
+BTreeSetGet-8        168ns ± 4%
+SortedPut-8          386ns ± 4%
+SortedGet-8          421ns ± 5%
+GoogleBTreePut-8     643ns ± 7%
+GoogleBTreeGet-8     320ns ± 4%
+ArtPut-8             153ns ± 0%
+ArtGet-8            47.9ns ±10%
+ArtRecoilmePut-8     124ns ± 3%
+ArtRecoilmeGet-8    34.0ns ± 3%
+
+name                alloc/op
+HashMapPut-8         68.3B ±13%
+HashMapGet-8         0.00B     
+RadixTreePut-8        129B ± 0%
+RadixTreeGet-8       0.00B     
+PlarRadixTreePut-8    107B ± 0%
+PlarRadixTreeGet-8   0.00B     
+SortedSetPut-8       35.0B ± 0%
+SortedSetGet-8       0.00B     
+BTreeSetPut-8        64.0B ± 0%
+BTreeSetGet-8        0.00B     
+SortedPut-8           212B ± 4%
+SortedGet-8          0.00B     
+GoogleBTreePut-8      151B ± 0%
+GoogleBTreeGet-8     16.0B ± 0%
+ArtPut-8             83.0B ± 0%
+ArtGet-8             0.00B     
+ArtRecoilmePut-8     90.0B ± 0%
+ArtRecoilmeGet-8     0.00B     
+
+name                allocs/op
+HashMapPut-8          0.00     
+HashMapGet-8          0.00     
+RadixTreePut-8        2.00 ± 0%
+RadixTreeGet-8        0.00     
+PlarRadixTreePut-8    4.00 ± 0%
+PlarRadixTreeGet-8    0.00     
+SortedSetPut-8        0.00     
+SortedSetGet-8        0.00     
+BTreeSetPut-8         0.00     
+BTreeSetGet-8         0.00     
+SortedPut-8           0.00     
+SortedGet-8           0.00     
+GoogleBTreePut-8      3.00 ± 0%
+GoogleBTreeGet-8      1.00 ± 0%
+ArtPut-8              3.00 ± 0%
+ArtGet-8              0.00     
+ArtRecoilmePut-8      1.00 ± 0%
+ArtRecoilmeGet-8      0.00  
  ```
 
-# Conclusion
-
- github.com/arriqaaq/art - is best
 
 
 # Author
